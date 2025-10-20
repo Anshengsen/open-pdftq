@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 转图片工具</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- 引入必要的库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+</head>
+<body>
+    <div class="gradient-bg">
+        <div class="gradient-1"></div>
+        <div class="gradient-2"></div>
+        <div class="gradient-3"></div>
+    </div>
+
+    <div id="app">
+        <header>
+            <h1>PDF 转图片工具</h1>
+            <p class="subtitle">将 PDF 文件转换为高质量图片</p>
+        </header>
+
+        <main>
+            <div class="upload-area" id="dropZone">
+                <input type="file" id="fileInput" accept=".pdf" hidden>
+                <div class="upload-content">
+                    <svg viewBox="0 0 24 24" width="48" height="48">
+                        <path fill="currentColor" d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                    </svg>
+                    <p>拖放 PDF 文件到此处或点击上传</p>
+                    <p class="hint">支持单页或多页 PDF 文件</p>
+                </div>
+            </div>
+
+            <div class="settings-panel" id="settingsPanel" hidden>
+                <div class="pages-preview">
+                    <div class="pages-header">
+                        <h3>页面预览</h3>
+                        <div class="pages-actions">
+                            <button id="selectAllBtn">全选</button>
+                            <button id="deselectAllBtn">取消全选</button>
+                        </div>
+                    </div>
+                    <div class="pages-grid" id="pagesGrid"></div>
+                </div>
+
+                <div class="settings-group">
+                    <label>输出格式</label>
+                    <select id="formatSelect">
+                        <option value="png">PNG</option>
+                        <option value="jpeg">JPEG</option>
+                        <option value="webp">WEBP</option>
+                    </select>
+                </div>
+
+                <div class="settings-group">
+                    <label>图片质量</label>
+                    <div class="quality-control">
+                        <input type="range" id="qualitySlider" min="1" max="100" value="90">
+                        <span id="qualityValue">90%</span>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <label>缩放比例</label>
+                    <div class="scale-control">
+                        <input type="range" id="scaleSlider" min="50" max="200" value="100">
+                        <span id="scaleValue">100%</span>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="convertBtn" class="primary">转换选中页面</button>
+                    <button id="downloadZipBtn" class="secondary">打包下载</button>
+                    <button id="clearBtn">清除</button>
+                </div>
+
+                <div class="progress-bar" id="progressBar" hidden>
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-text" id="progressText">0%</div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="license">
+                <p>遵循 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT 开源协议</a></p>
+                <p>更新时间：2025-10-12 06:18:09</p>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
